@@ -6,6 +6,7 @@ const server = http.createServer(function(req, res){
     console.log(req.url);
 
     let path = "./views/"
+    let resCode = 200;
 
     switch(req.url){
         case '/':
@@ -13,6 +14,14 @@ const server = http.createServer(function(req, res){
             break;
         case '/about.html':
             path += 'about.html'
+            break;
+
+        case '/contact.html':
+            path += 'contact.html'; 
+            break;
+        default:
+            path += '404.html';
+            resCode = 404;
             break;
     }
 
@@ -22,7 +31,7 @@ const server = http.createServer(function(req, res){
         console.log(err);
         res.end();
     }
-    res.writeHead(200,{"Content-Type" : "text/html"});
+    res.writeHead(resCode,{"Content-Type" : "text/html"});
     res.end(data);
     });
     
